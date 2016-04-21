@@ -1,6 +1,6 @@
 import csv
 
-csvFile = open('sample.csv', 'rU')#enter the csv filename
+csvFile = open('something.csv', 'rU')#enter the csv filename
 csvReader = csv.reader(csvFile)
 csvData = list(csvReader)
 
