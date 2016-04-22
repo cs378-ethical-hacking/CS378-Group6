@@ -2,10 +2,14 @@ import pyPdf
 import sys
 import StringIO
 from reportlab.pdfgen import canvas
+from reportlab.rl_config import defaultPageSize
 
 # make sure it doesn't access a random place
 assert len(sys.argv) >= 2
 filename = sys.argv[1]
+
+PAGE_WIDTH = defaultPageSize[0]
+PAGE_HEIGHT = defaultPageSize[1]
 
 txt = open(filename)
 packet = StringIO.StringIO()
@@ -16,8 +20,8 @@ for line in txt:
 	line = line.replace ('\n', '')
 	string.append(line)
 
-y = 800
-cv.drawString(200, y, "scan report")
+y = PAGE_HEIGHT - 10
+cv.drawString(PAGE_WIDTH / 2, y, "scan report")
 y -= 50
 for line in string:
 	cv.drawString(20, y, line)
