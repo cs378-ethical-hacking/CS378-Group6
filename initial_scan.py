@@ -132,10 +132,10 @@ def create_csv():
 
 	return output_csv
 
-def write_to_csv(csv_output):
+def write_to_csv(filename, csv_output):
 	line_split = csv_output.split('\n')
 
-	csv_file = open('something.csv','w')
+	csv_file = open(filename + '.csv','w')
 
 	num_lines = len(line_split)
 	index = 0

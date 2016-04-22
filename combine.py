@@ -5,7 +5,7 @@ import os
 import sys
 import re
 import copy
-from initial_scan import set_dictionary 
+from initial_scan import *
 
 #### RUN NMAP SCAN ####
 filename = sys.argv[1]
@@ -67,5 +67,8 @@ def main():
     nmap_dict = set_dictionary(filename)
     print nmap_dict
     run_services(nmap_dict)
+
+    csv = create_csv()
+    write_to_csv(filename, csv)
 
 main()
