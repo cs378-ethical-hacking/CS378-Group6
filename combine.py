@@ -6,6 +6,7 @@ import sys
 import re
 import copy
 from initial_scan import *
+from csv_to_html import *
 
 #### RUN NMAP SCAN ####
 filename = sys.argv[1]
@@ -70,5 +71,6 @@ def main():
 
     csv = create_csv()
     write_to_csv(filename, csv)
+    csv_to_html(filename)
 
 main()
