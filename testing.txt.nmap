@@ -1,38 +1,16 @@
-# Nmap 7.01 scan initiated Wed Apr 20 15:16:30 2016 as: nmap -O -oA testing.txt 10.202.208.2-5
-Nmap scan report for 10.202.208.2
-Host is up (0.0019s latency).
-Not shown: 997 filtered ports
-PORT    STATE SERVICE
-22/tcp  open  ssh
-80/tcp  open  http
-443/tcp open  https
-MAC Address: 00:21:9B:9F:A8:80 (Dell)
-Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
-Device type: general purpose
-Running: Linux 2.6.X|3.X
-OS CPE: cpe:/o:linux:linux_kernel:2.6 cpe:/o:linux:linux_kernel:3
-OS details: Linux 2.6.32 - 3.10, Linux 2.6.32 - 3.13, Linux 3.2 - 3.10, Linux 3.2 - 3.13, Linux 3.2 - 3.8
-Network Distance: 1 hop
-
-Nmap scan report for 10.202.208.4
-Host is up (0.0020s latency).
-Not shown: 991 closed ports
-PORT     STATE SERVICE
-22/tcp   open  ssh
-53/tcp   open  domain
-80/tcp   open  http
-111/tcp  open  rpcbind
-139/tcp  open  netbios-ssn
-445/tcp  open  microsoft-ds
-2049/tcp open  nfs
-3306/tcp open  mysql
-8080/tcp open  http-proxy
-MAC Address: 26:74:35:43:2E:2A (Unknown)
-Device type: general purpose
-Running: Linux 3.X|4.X
-OS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4
-OS details: Linux 3.2 - 4.0
+# Nmap 7.01 scan initiated Fri Apr 22 15:27:46 2016 as: nmap -O -oA testing.txt 10.202.208.18
+Nmap scan report for 10.202.208.18
+Host is up (0.0040s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE
+23/tcp open  telnet
+80/tcp open  http
+MAC Address: 00:18:19:4D:81:80 (Cisco Systems)
+Device type: WAP|router
+Running: Cisco IOS 12.X
+OS CPE: cpe:/h:cisco:aironet_ap350 cpe:/h:cisco:aironet_ap1100 cpe:/h:cisco:aironet_ap1200 cpe:/o:cisco:ios:12.3 cpe:/h:cisco:catalyst_2600
+OS details: Cisco Aironet 350, 1100, 1200, or 1131AG WAP; or Cisco 2600 router (IOS 12.3)
 Network Distance: 1 hop
 
 OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-# Nmap done at Wed Apr 20 15:16:54 2016 -- 4 IP addresses (2 hosts up) scanned in 26.31 seconds
+# Nmap done at Fri Apr 22 15:28:03 2016 -- 1 IP address (1 host up) scanned in 19.59 seconds

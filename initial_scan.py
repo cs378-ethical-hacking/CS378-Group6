@@ -127,7 +127,7 @@ def create_csv():
 
 				output_csv += ip + ',' + hostname + ',' + port_num + ','
 				output_csv += port_transport + ',' + port_status + ',' + port_service + ','
-				output_csv += mac_address + ',' + device_type + ',' + running + ','
+				output_csv += str(mac_address) + ',' + str(device_type) + ',' + str(running) + ','
 				output_csv += os_cpe + ',' + os_details + ',' + network_distance + '\n'
 
 	return output_csv
