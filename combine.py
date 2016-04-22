@@ -57,6 +57,8 @@ def run_services(network_dict):
             #    hydra = "hydra -l root -P " + word_list + "ssh://"+ip
             #    coutput = commandsgetstatusoutput(hydra)
 
+            #### TELNET NEEDS TO BE ADDED ####
+
 
 
 def run_john(john_list):
