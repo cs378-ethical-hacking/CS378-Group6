@@ -43,7 +43,8 @@ def run_services(network_dict):
                             if("Timeout" not in coutput[1]):
                                 print "successful--do something--"
                                 break;
-        
+                                
+            ##### NEED TO BE TESTED #####        
             #if port.split("/")[0] == '79':
             #    finger_service = "finger -l @" + ip
             #    coutput = commands.getstatusoutput(finger_service)
@@ -51,7 +52,11 @@ def run_services(network_dict):
             #    if("Timeout" not in coutput):
             #        print "successful WOO!"
 
-            #### SSH IS THE NEXT SERVICE TO RUN ####
+            #if port.split("/")[0] == '22':
+            #    hydra = "hydra -l root -P " + word_list + "ssh://"+ip
+            #    coutput = commandsgetstatusoutput(hydra)
+
+
 
 def run_john(john_list):
     #word_list = "/usr/share/john/"+ john_list
