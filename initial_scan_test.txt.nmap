@@ -1,0 +1,28 @@
+Nmap scan report for router.asus.com (10.202.208.1)
+Host is up (0.0027s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE
+53/tcp open  domain
+80/tcp open  http
+MAC Address: 10:BF:48:D3:93:B8 (Asustek Computer)
+Device type: general purpose
+Running: Linux 2.6.X
+OS CPE: cpe:/o:linux:linux_kernel:2.6
+OS details: Linux 2.6.8 - 2.6.30
+Network Distance: 1 hop
+
+Nmap scan report for router.asus.com (10.202.208.2)
+Host is up (0.0027s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE
+53/tcp open  domain
+80/tcp open  http
+MAC Address: asdfsadfsaf
+Device type: asdf asdfasdf
+Running: sdf 2.6.X
+OS CPE: cpe:asdfsafsdf
+OS details: asdfsadf
+Network Distance: asdfas
+
+OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Wed Apr 20 15:16:54 2016 -- 4 IP addresses (2 hosts up) scanned in 26.31 seconds
