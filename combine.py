@@ -44,7 +44,14 @@ def run_services(network_dict):
                                 print "successful--do something--"
                                 break;
         
-            
+            #if port.split("/")[0] == '79':
+            #    finger_service = "finger -l @" + ip
+            #    coutput = commands.getstatusoutput(finger_service)
+            #
+            #    if("Timeout" not in coutput):
+            #        print "successful WOO!"
+
+            #### SSH IS THE NEXT SERVICE TO RUN ####
 
 def run_john(john_list):
     #word_list = "/usr/share/john/"+ john_list
