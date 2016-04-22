@@ -137,8 +137,14 @@ def write_to_csv(csv_output):
 
 	csv_file = open('something.csv','w')
 
+	num_lines = len(line_split)
+	index = 0
 	for line in line_split:
-		csv_file.write(line + '\n')
+		index += 1
+		if index == num_lines:
+			csv_file.write(line)
+		else:
+			csv_file.write(line + '\n')
 
 	csv_file.close()
 			
