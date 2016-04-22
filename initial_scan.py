@@ -5,32 +5,37 @@ import csv
 
 info_dict = {}
 
-def set_dictionary():
+def set_dictionary(filename):
 	headers = list()
 
 	for i in range(8):
 		headers.append(0)
 	ip = ""
 
-	nmap_file = open('initial_scan_test.txt', 'r')
+	nmap_file = open(filename + ".nmap", 'r')
 
-	with open('initial_scan_test.txt', 'r') as my_file:
+	with open(filename + ".nmap", 'r') as my_file:
 		nmap_file = my_file.read()
 
 		nmap_file_split = nmap_file.split('\n')
-		total_lines = len(nmap_file_split)
-
+		total_lines = len(nmap_file_split)-4
+  
 		for i in range(0, total_lines):
 			line = nmap_file_split[i]
 			if 'Nmap scan report for ' in line:
 				line_split = line.split('Nmap scan report for ')
 				ip = line_split[1]
-				ip_split = ip.split("(")
-				hostname = ip_split[0]
-				ip = ip_split[1][:-1]
-				# print(hostname)
-				# print(ip)
+				if("(" in ip):
+					ip_split = ip.split("(")
+					hostname = ip_split[0]
+					ip = ip_split[1][:-1]
+				else:
+					ip = ip
+					hostname = ""
+				#print hostname
+				#print ip
 				headers[0] = hostname
+				#print "header: " , headers[0]
 			
 			elif 'PORT' in line:
 				services = []
@@ -94,7 +99,10 @@ def set_dictionary():
 				for i in range(len(headers)):
 					headers[i] = 0
 		info_dict[ip] = headers
-		print(info_dict)
+		#print(info_dict)
+
+	#del info_dict['']
+	return info_dict
 
 # Convert dictionary to CSV file
 def create_csv():
@@ -119,18 +127,24 @@ def create_csv():
 
 				output_csv += ip + ',' + hostname + ',' + port_num + ','
 				output_csv += port_transport + ',' + port_status + ',' + port_service + ','
-				output_csv += mac_address + ',' + device_type + ',' + running + ','
+				output_csv += str(mac_address) + ',' + str(device_type) + ',' + str(running) + ','
 				output_csv += os_cpe + ',' + os_details + ',' + network_distance + '\n'
 
 	return output_csv
 
-def write_to_csv(csv_output):
+def write_to_csv(filename, csv_output):
 	line_split = csv_output.split('\n')
 
-	csv_file = open('something.csv','w')
+	csv_file = open(filename + '.csv','w')
 
+	num_lines = len(line_split)
+	index = 0
 	for line in line_split:
-		csv_file.write(line + '\n')
+		index += 1
+		if index == num_lines:
+			csv_file.write(line)
+		else:
+			csv_file.write(line + '\n')
 
 	csv_file.close()
 			
@@ -159,7 +173,8 @@ def set_service_info(services):
 
 	return all_services
 
-set_dictionary()
-csv_output = create_csv()
-write_to_csv(csv_output)
+if __name__ == "__main__":
+	set_dictionary("initial_scan_test.txt")
+	csv_output = create_csv()
+	write_to_csv(csv_output)
 
