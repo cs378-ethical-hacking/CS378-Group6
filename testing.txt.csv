@@ -1,3 +1,0 @@
-IP,Hostname,Port Number,Port Transport,Port Status,Port Service,Mac Address,Device Type,Running,OS CPE,OS Details,Network Distance
-10.202.208.18,,23,tcp,open,telnet,00:18:19:4D:81:80 (Cisco Systems),WAP|router,Cisco IOS 12.X,cpe:/h:cisco:aironet_ap350 cpe:/h:cisco:aironet_ap1100 cpe:/h:cisco:aironet_ap1200 cpe:/o:cisco:ios:12.3 cpe:/h:cisco:catalyst_2600,Cisco Aironet 350, 1100, 1200, or 1131AG WAP; or Cisco 2600 router (IOS 12.3),1 hop
-10.202.208.18,,80,tcp,open,http,00:18:19:4D:81:80 (Cisco Systems),WAP|router,Cisco IOS 12.X,cpe:/h:cisco:aironet_ap350 cpe:/h:cisco:aironet_ap1100 cpe:/h:cisco:aironet_ap1200 cpe:/o:cisco:ios:12.3 cpe:/h:cisco:catalyst_2600,Cisco Aironet 350, 1100, 1200, or 1131AG WAP; or Cisco 2600 router (IOS 12.3),1 hop

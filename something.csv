@@ -1,5 +1,0 @@
-IP,Hostname,Port Number,Port Transport,Port Status,Port Service,Mac Address,Device Type,Running,OS CPE,OS Details,Network Distance
-10.202.208.2,router.asus.com ,53,tcp,open,domain,asdfsadfsaf,asdf asdfasdf,sdf 2.6.X,cpe:asdfsafsdf,asdfsadf,asdfas
-10.202.208.2,router.asus.com ,80,tcp,open,http,asdfsadfsaf,asdf asdfasdf,sdf 2.6.X,cpe:asdfsafsdf,asdfsadf,asdfas
-10.202.208.1,router.asus.com ,53,tcp,open,domain,10:BF:48:D3:93:B8 (Asustek Computer),general purpose,Linux 2.6.X,cpe:/o:linux:linux_kernel:2.6,Linux 2.6.8 - 2.6.30,1 hop
-10.202.208.1,router.asus.com ,80,tcp,open,http,10:BF:48:D3:93:B8 (Asustek Computer),general purpose,Linux 2.6.X,cpe:/o:linux:linux_kernel:2.6,Linux 2.6.8 - 2.6.30,1 hop
