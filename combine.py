@@ -60,7 +60,6 @@ def run_services(network_dict):
             #### TELNET NEEDS TO BE ADDED ####
 
 
-
 def run_john(john_list):
     #word_list = "/usr/share/john/"+ john_list
     word_list = "./"+ john_list
@@ -73,11 +72,17 @@ def run_john(john_list):
 def main():
     run_nmap()
     nmap_dict = set_dictionary(filename)
+
     print nmap_dict
     run_services(nmap_dict)
 
+    # Generate a CSV file corresponding to the NMAP scan output
     csv = create_csv()
+
+    # Write the CSV to an output file
     write_to_csv(filename, csv)
+
+    # Use the generated CSV output file to export to HTML boostrap file
     csv_to_html(filename)
 
 main()

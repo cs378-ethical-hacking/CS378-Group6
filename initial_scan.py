@@ -5,6 +5,7 @@ import csv
 
 info_dict = {}
 
+# parse the nmap output and create a dictionary for the headers
 def set_dictionary(filename):
 	headers = list()
 
@@ -125,7 +126,7 @@ def create_csv():
 				port_num, port_transport, port_status, port_service =\
 				(service_info[0], service_info[1], service_info[2], service_info[3])
 
-
+				# Hacky way of fixing the bootstrapping issue
 				output_csv += ip.replace(',', '-') + ',' + hostname.replace(',','-') + ',' + port_num.replace(',','-') + ','
 				output_csv += port_transport.replace(',','-') + ',' + port_status.replace(',','-') + ',' + port_service.replace(',','-') + ','
 				output_csv += (str(mac_address)).replace(',','-') + ',' + (str(device_type)).replace(',','-') + ',' + (str(running)).replace(',','-') + ','
@@ -133,6 +134,7 @@ def create_csv():
 
 	return output_csv
 
+# Write the CSV to an output file
 def write_to_csv(filename, csv_output):
 	line_split = csv_output.split('\n')
 

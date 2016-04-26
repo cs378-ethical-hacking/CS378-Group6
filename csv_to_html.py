@@ -1,12 +1,12 @@
 import csv
 
 def csv_to_html(filename):
-    csvFile = open(filename + ".csv", 'rU')#enter the csv filename
+    csvFile = open(filename + ".csv", 'rU')
     csvReader = csv.reader(csvFile)
     csvData = list(csvReader)
 
-
-    with open(filename+'.html', 'w') as html: #enter the output filename
+    # set the output file name
+    with open(filename+'.html', 'w') as html: 
         html.write('''<!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.css">
 
