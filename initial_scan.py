@@ -125,10 +125,11 @@ def create_csv():
 				port_num, port_transport, port_status, port_service =\
 				(service_info[0], service_info[1], service_info[2], service_info[3])
 
-				output_csv += ip + ',' + hostname + ',' + port_num + ','
-				output_csv += port_transport + ',' + port_status + ',' + port_service + ','
-				output_csv += str(mac_address) + ',' + str(device_type) + ',' + str(running) + ','
-				output_csv += os_cpe + ',' + os_details + ',' + network_distance + '\n'
+
+				output_csv += ip.replace(',', '-') + ',' + hostname.replace(',','-') + ',' + port_num.replace(',','-') + ','
+				output_csv += port_transport.replace(',','-') + ',' + port_status.replace(',','-') + ',' + port_service.replace(',','-') + ','
+				output_csv += (str(mac_address)).replace(',','-') + ',' + (str(device_type)).replace(',','-') + ',' + (str(running)).replace(',','-') + ','
+				output_csv += os_cpe.replace(',','-') + ',' + os_details.replace(',','-') + ',' + network_distance.replace(',','-') + '\n'
 
 	return output_csv
 
