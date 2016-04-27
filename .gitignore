@@ -1,3 +1,4 @@
 *.pyc
 *.gnmap
-*.xml 
+*.xml
+*.swp
