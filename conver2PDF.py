@@ -10,12 +10,12 @@ assert len(sys.argv) >= 2
 filename = sys.argv[1]
 
 # some constants
-FONT_SIZE_TITLE = 50
-FONT_SIZE_CONTENT = 20
+FONT_SIZE_TITLE = 40
+FONT_SIZE_CONTENT = 15
 FONT_SIZE_CLAIMER = 15
 SIZE_NEWPAGE = 60
 X_OFFSET = 50
-Y_OFFSET = 30
+Y_OFFSET = FONT_SIZE_CONTENT * 1.5
 PAGE_WIDTH = defaultPageSize[0]
 PAGE_HEIGHT = defaultPageSize[1]
 
