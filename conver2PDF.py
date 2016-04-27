@@ -9,6 +9,10 @@ from reportlab.pdfbase.ttfonts import TTFont
 assert len(sys.argv) >= 2
 filename = sys.argv[1]
 
+FONT_SIZE_TITLE = 50
+FONT_SIZE_CONTENT = 20
+SIZE_NEWPAGE = 60
+
 PAGE_WIDTH = defaultPageSize[0]
 PAGE_HEIGHT = defaultPageSize[1]
 
@@ -22,15 +26,21 @@ for line in txt:
 	string.append(line)
 
 pdfmetrics.registerFont(TTFont('serif', 'LiberationSerif-Regular.ttf'))
-cv.setFont('serif', 30)
-y = PAGE_HEIGHT - 50
+cv.setFont('serif', FONT_SIZE_TITLE)
+y = PAGE_HEIGHT - SIZE_NEWPAGE
 cv.drawString(PAGE_WIDTH / 2, y, "scan report")
-y -= 50
+y -= FONT_SIZE_TITLE
 
-cv.setFont("serif", 20)
+cv.setFont("serif", FONT_SIZE_CONTENT)
 for line in string:
 	cv.drawString(20, y, line)
-	y -= 20
+	y -= FONT_SIZE_CONTENT
+        # reset y coordinate when it reaches the end of a page
+        if y <= FONT_SIZE_TITLE:
+            cv.showPage()
+            y = PAGE_HEIGHT - SIZE_NEWPAGE
+            cv.setFont('serif', FONT_SIZE_CONTENT)
+
 	
 cv.save()
 packet.seek(0)
