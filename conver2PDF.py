@@ -16,10 +16,11 @@ FONT_SIZE_CLAIMER = 15
 SIZE_NEWPAGE = 60
 X_OFFSET = 50
 Y_OFFSET = 30
-
 PAGE_WIDTH = defaultPageSize[0]
 PAGE_HEIGHT = defaultPageSize[1]
 
+
+# read in txt file
 txt = open(filename)
 packet = StringIO.StringIO()
 cv = canvas.Canvas(packet)
@@ -29,6 +30,9 @@ for line in txt:
 	line = line.replace ('\n', '')
 	string.append(line)
 
+
+# set headers
+cv.setTitle("scan report")
 pdfmetrics.registerFont(TTFont('serif', 'LiberationSerif-Regular.ttf'))
 cv.setFont('serif', FONT_SIZE_TITLE)
 y = PAGE_HEIGHT - SIZE_NEWPAGE
@@ -45,15 +49,27 @@ y -= SIZE_NEWPAGE
 
 
 
+report_line = False
+
 
 cv.setFont("serif", FONT_SIZE_CONTENT)
 for line in string:
         # insert an extra line for each nmap scan
-        if line == "\n":
-            cv.drawString(X_OFFSET, y, "\n")
+        print line == ""
+        if line == "":
+            y -= 2 * Y_OFFSET
+            report_line = False
+            continue
+
+        # add in tab
+        if report_line:
+	    cv.drawString(X_OFFSET, y, "    " + line)
+        else:
+            cv.drawString(X_OFFSET, y, line)
             y -= Y_OFFSET
-	cv.drawString(X_OFFSET, y, line)
+
 	y -= Y_OFFSET
+        report_line = True
         # reset y coordinate when it reaches the end of a page
         if y <= FONT_SIZE_TITLE:
             cv.showPage()
