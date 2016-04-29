@@ -2,3 +2,4 @@
 *.gnmap
 *.xml
 *.swp
+.DS_Store
