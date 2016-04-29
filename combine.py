@@ -7,6 +7,7 @@ import re
 import copy
 from initial_scan import *
 from csv_to_html import *
+from snmpwalk import *
 
 #### RUN NMAP SCAN ####
 filename = sys.argv[1]
@@ -14,7 +15,7 @@ networkrange = sys.argv[2]
 
 def run_nmap():
 
-    command = 'nmap -O -oA ' + filename + ' ' + networkrange 
+    command = 'nmap -O -oA ' + filename + ' ' + networkrange
     print command
     #coutput = commands.getstatusoutput(command)
 
@@ -27,31 +28,17 @@ def run_services(network_dict):
     word_list = run_john("password.lst")
     for ip in network_dict:
         services = network_dict[ip][1]
-        
+
+
         for port in services:
-            if port.split("/")[0] == '161':
-                snmpwalk_public = "snmpwalk -v1 -c public " + ip
-                print snmpwalk_public
-                coutput = commands.getstatusoutput(snmpwalk_public)
-                
-                if("Timeout" not in coutput[1]):
-                    print "successful--do something--"
-                else:
-                    for word in word_list:
-                        if "#" not in word:
-                            snmpwalk_john = "snmpwalk -v1 -c " + word.rstrip() +" " + ip
-                            coutput = commands.getstatusoutput(snmpwalk_john)
-                            if("Timeout" not in coutput[1]):
-                                print "successful--do something--"
-                                break;
-                                
             if port.split("/")[0] == '79':
                 finger_service = 'finger -l @' + ip
                 print finger_service
                 coutput = commands.getstatusoutput(finger_service)
-            
+                # print type(coutput)
                 if("Timeout" not in coutput):
                     print "successful WOO!"
+                    write_to_file("port79.txt", coutput[1])
 
             #### NEEDS TO BE TESTED ####
             #if port.split("/")[0] == '22':
@@ -70,19 +57,20 @@ def run_john(john_list):
     return words
 
 def main():
-    run_nmap()
-    nmap_dict = set_dictionary(filename)
+    #run_nmap()
+    #nmap_dict = set_dictionary(filename)
 
-    print nmap_dict
-    run_services(nmap_dict)
+    run_snmpwalk('10.202.208.18')
+    #print nmap_dict
+    #run_services(nmap_dict)
 
     # Generate a CSV file corresponding to the NMAP scan output
-    csv = create_csv()
+    #csv = create_csv()
 
     # Write the CSV to an output file
-    write_to_csv(filename, csv)
+    #write_to_csv(filename, csv)
 
     # Use the generated CSV output file to export to HTML boostrap file
-    csv_to_html(filename)
+    #csv_to_html(filename)
 
 main()
