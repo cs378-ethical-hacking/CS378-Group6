@@ -45,19 +45,19 @@ def run_services(network_dict):
                                 print "successful--do something--"
                                 break;
                                 
-            ##### NEED TO BE TESTED #####        
-            #if port.split("/")[0] == '79':
-            #    finger_service = "finger -l @" + ip
-            #    coutput = commands.getstatusoutput(finger_service)
-            #
-            #    if("Timeout" not in coutput):
-            #        print "successful WOO!"
+            if port.split("/")[0] == '79':
+                finger_service = 'finger -l @' + ip
+                print finger_service
+                coutput = commands.getstatusoutput(finger_service)
+            
+                if("Timeout" not in coutput):
+                    print "successful WOO!"
 
+            #### NEEDS TO BE TESTED ####
             #if port.split("/")[0] == '22':
             #    hydra = "hydra -l root -P " + word_list + "ssh://"+ip
             #    coutput = commandsgetstatusoutput(hydra)
 
-            #### TELNET NEEDS TO BE ADDED ####
 
 
 def run_john(john_list):
