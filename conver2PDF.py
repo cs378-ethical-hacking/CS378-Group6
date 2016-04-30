@@ -1,13 +1,16 @@
 import pyPdf
 import sys
+import re
 import StringIO
 from reportlab.pdfgen import canvas
 from reportlab.rl_config import defaultPageSize
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib.units import inch
 # make sure it doesn't access a random place
 assert len(sys.argv) >= 2
-filename = sys.argv[1]
+length = len(sys.argv)
+filename = sys.argv[length - 1]
 
 # some constants
 FONT_SIZE_TITLE = 40
@@ -26,10 +29,23 @@ packet = StringIO.StringIO()
 cv = canvas.Canvas(packet)
 depth = 0
 string = list()
+new_line = True
 for line in txt:
-	line = line.replace ('\n', '')
-	string.append(line)
+    if new_line:
+        line = re.search(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', line).group()
+        line = "IP address: " + line
+        new_line = False
+    elif line == '\n':
+        new_line = True
+    line = line.replace ('\n', '')
+    string.append(line)
 
+
+highLight_OS = False
+
+for i in xrange(1, length - 1):
+    if sys.argv[i] == "-o":
+        highLight_OS = True
 
 # set headers
 cv.setTitle("scan report")
@@ -49,37 +65,31 @@ y -= SIZE_NEWPAGE
 
 
 
-report_line = False
-
-
 cv.setFont("serif", FONT_SIZE_CONTENT)
 for line in string:
-        # insert an extra line for each nmap scan
-        print line == ""
-        if line == "":
-            y -= 2 * Y_OFFSET
-            report_line = False
-            continue
-
+        OS_line = False
+        if highLight_OS and "OS" in line:
+            OS_line = True
+            
+        if OS_line:
+            cv.setFillColorRGB(1, 1, 0)
+            cv.setStrokeColorRGB(1, 1, 0)
+            width = pdfmetrics.stringWidth(line, 'serif', FONT_SIZE_CONTENT)
+            cv.rect(X_OFFSET, y - FONT_SIZE_CONTENT/ 2.1, width + 1, FONT_SIZE_CONTENT * 1.1, fill = 1)
+        cv.setFillColorRGB(0, 0, 0)
+            
         # add in tab
-        if report_line:
-	    cv.drawString(X_OFFSET, y, "    " + line)
-        else:
-            cv.drawString(X_OFFSET, y, line)
-            y -= Y_OFFSET
-
-	y -= Y_OFFSET
-        report_line = True
+        cv.drawString(X_OFFSET, y, line)
+        y -= Y_OFFSET
         # reset y coordinate when it reaches the end of a page
         if y <= FONT_SIZE_TITLE:
             cv.showPage()
             y = PAGE_HEIGHT - SIZE_NEWPAGE
             cv.setFont('serif', FONT_SIZE_CONTENT)
 
-	
 cv.save()
 packet.seek(0)
 with open("./scanOutput.pdf", "wb") as openfile:
-	openfile.write(packet.getvalue())
+    openfile.write(packet.getvalue())
 
 
