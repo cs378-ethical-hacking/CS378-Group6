@@ -9,10 +9,13 @@ from initial_scan import *
 from csv_to_html import *
 from snmpwalk import *
 
-#### RUN NMAP SCAN ####
-filename = sys.argv[1]
-networkrange = sys.argv[2]
+import argparse
+
 #word_list = "/usr/share/john/"+ john_list
+filename = ""
+networkrange = ""
+pw_file = ""
+
 def run_nmap():
     print "nmap scan..."
     command = 'nmap -O -oA ' + filename + ' ' + networkrange
@@ -48,7 +51,7 @@ def run_services(network_dict):
 
             if port.split("/")[0] == '22':
                 print "run hydra..."
-                hydra = "hydra -l root -P /usr/share/john/password.lst ssh://"+ip
+                hydra = "hydra -l root -P "+ pw_file +" ssh://"+ip
                 print hydra
                 coutput = commands.getstatusoutput(hydra)
 
@@ -57,30 +60,61 @@ def run_services(network_dict):
                     write_to_file(ip+ "_output.txt", hydra)
                     write_to_file(ip+ "_output.txt", coutput[1])
 
+def arg_parse():
+    parser = argparse.ArgumentParser(description="Disclaimer: This is an educational project for CS378: Ethical Hacking at the University of Texas at Austin with Chris Prosise in Spring 2016. Our goal was to create a simple tool that automates some portion of the (network) assessment methodology. Tools Used: nmap, snmpwalk, finger and hydra.")
 
+    parser.add_argument('ip', help='ip addresses required for network scanning')
+    parser.add_argument('-o', action='store', dest='output_file', default="nmap_output", help='network scan output file path; by default=nmap_output')
+    parser.add_argument('--password=', action='store', dest='password_file', default="./password.lst",help='password file path for bruce force')
+    parser.add_argument('--pdf', action='store_true', default=False, dest='is_pdf',help='Output to PDF')
+    parser.add_argument('--csv', action='store_true', default=False, dest='is_csv',help='Output to CSV')
+    parser.add_argument('--html', action='store_true', default=False, dest='is_html',help='Output to HTML')
+    parser.add_argument('-a', '--all', action='store_true', default=False, dest='is_all',help='Output to PDF, CSV, HTML')
+    result = parser.parse_args()
 
-def run_john(john_list):
-    word_list = john_list
-    words = []
-    with open(word_list, "r") as f:
-        for line in f:
-            words.append(line)
-    return words
+    return result
 
 def main():
+    global filename
+    global networkrange
+    global pw_file
+
+    # Argument parsing by default
+    arg_result = arg_parse()
+    filename = arg_result.output_file
+    networkrange = arg_result.ip
+    pw_file = arg_result.password_file
+
+    # Run nmap, create a dictionary, and run services by default
     run_nmap()
     nmap_dict = set_dictionary(filename)
-
     run_services(nmap_dict)
 
-    # Generate a CSV file corresponding to the NMAP scan output
-    csv = create_csv()
+    # Output to csv, html, pdf is optional
+    if (arg_result.is_all):
+        csv = create_csv()
+        write_to_csv(filename, csv)
+        csv_to_html(filename)
+        # html
 
-    # Write the CSV to an output file
-    write_to_csv(filename, csv)
+    elif (arg_result.is_csv):
+        # Generate a CSV file corresponding to the NMAP scan output
+        csv = create_csv()
 
-    # Use the generated CSV output file to export to HTML boostrap file
-    csv_to_html(filename)
+        # Write the CSV to an output file
+        write_to_csv(filename, csv)
+
+    elif (arg_result.is_html):
+        csv = create_csv()
+        write_to_csv(filename, csv)
+
+        # Use the generated CSV output file to export to HTML boostrap file
+        csv_to_html(filename)
+
+    elif (arg_result.is_pdf):
+        # Output to pdf
+        print "pdf"
+
 
 if __name__ == "__main__":
     main()
