@@ -8,6 +8,7 @@ import copy
 from initial_scan import *
 from csv_to_html import *
 from snmpwalk import *
+from toPDF  import *
 
 import argparse
 
@@ -113,7 +114,9 @@ def main():
 
     elif (arg_result.is_pdf):
         # Output to pdf
+        to_pdf(filename)
         print "pdf"
+
 
 
 if __name__ == "__main__":
