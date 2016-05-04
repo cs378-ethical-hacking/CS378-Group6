@@ -10,7 +10,7 @@ def set_dictionary(filename):
 	headers = list()
 
 	for i in range(8):
-		headers.append(0)
+		headers.append("")
 	ip = ""
 
 	nmap_file = open(filename + ".nmap", 'r')
@@ -20,7 +20,7 @@ def set_dictionary(filename):
 
 		nmap_file_split = nmap_file.split('\n')
 		total_lines = len(nmap_file_split)-4
-  
+
 		for i in range(0, total_lines):
 			line = nmap_file_split[i]
 			if 'Nmap scan report for ' in line:
@@ -37,7 +37,7 @@ def set_dictionary(filename):
 				#print ip
 				headers[0] = hostname
 				#print "header: " , headers[0]
-			
+
 			elif 'PORT' in line:
 				services = []
 				while ':' not in nmap_file_split[i+1]:
@@ -98,7 +98,7 @@ def set_dictionary(filename):
 				info_dict[ip] = tempHead
 
 				for i in range(len(headers)):
-					headers[i] = 0
+					headers[i] = ""
 		info_dict[ip] = headers
 		#print(info_dict)
 
@@ -114,7 +114,7 @@ def create_csv():
 		headers = info_dict[ip]
 
 		hostname, services, mac_address, device_type, running, os_cpe, os_details, network_distance =\
-		(headers[0], set_service_info(headers[1]), headers[2], headers[3], 
+		(headers[0], set_service_info(headers[1]), headers[2], headers[3],
 			headers[4], headers[5], headers[6], headers[7])
 
 
@@ -150,7 +150,7 @@ def write_to_csv(filename, csv_output):
 			csv_file.write(line + '\n')
 
 	csv_file.close()
-			
+
 
 def set_service_info(services):
 	# print 'service info'
@@ -180,4 +180,3 @@ if __name__ == "__main__":
 	set_dictionary("initial_scan_test.txt")
 	csv_output = create_csv()
 	write_to_csv(csv_output)
-

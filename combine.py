@@ -88,7 +88,7 @@ def main():
     pw_file = arg_result.password_file
 
     # Run nmap, create a dictionary, and run services by default
-    #run_nmap()
+    run_nmap()
     nmap_dict = set_dictionary(filename)
     run_services(nmap_dict)
 
