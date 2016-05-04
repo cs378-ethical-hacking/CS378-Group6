@@ -28,7 +28,8 @@ def run_nmap():
 
 def run_services(network_dict):
     print "run services..."
-    word_list = run_john("./password.lst")
+    word_list = run_john(pw_file)
+    print network_dict
 
     for ip in network_dict:
         print "host: " + ip
@@ -87,7 +88,7 @@ def main():
     pw_file = arg_result.password_file
 
     # Run nmap, create a dictionary, and run services by default
-    run_nmap()
+    #run_nmap()
     nmap_dict = set_dictionary(filename)
     run_services(nmap_dict)
 
@@ -96,13 +97,11 @@ def main():
         csv = create_csv()
         write_to_csv(filename, csv)
         csv_to_html(filename)
-        # html
 
     elif (arg_result.is_csv):
         # Generate a CSV file corresponding to the NMAP scan output
-        csv = create_csv()
-
         # Write the CSV to an output file
+        csv = create_csv()
         write_to_csv(filename, csv)
 
     elif (arg_result.is_html):

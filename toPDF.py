@@ -1,20 +1,7 @@
 import sys
-try:
-	import pyPdf
-except ImportError, e:
-	print ("error required pyPdf")
-	sys.exit(1)
+
 import re
 import StringIO
-try:
-	from reportlab.pdfgen import canvas
-	from reportlab.rl_config import defaultPageSize
-	from reportlab.pdfbase import pdfmetrics
-	from reportlab.pdfbase.ttfonts import TTFont
-	from reportlab.lib.units import inch
-except ImportError, e:
-	print ("error required reportlab")
-	sys.exit(1)
 
 # make sure it doesn't access a random place
 #assert len(sys.argv) >= 2
@@ -23,7 +10,21 @@ except ImportError, e:
 
 
 def to_pdf(filename):
-  # some constants
+  try:
+    import pyPdf
+  except ImportError, e:
+    print ("error required pyPdf")
+    sys.exit(1)
+  try:
+    from reportlab.pdfgen import canvas
+    from reportlab.rl_config import defaultPageSize
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfbase.ttfonts import TTFont
+    from reportlab.lib.units import inch
+  except ImportError, e:
+    print ("error required reportlab")
+    sys.exit(1)
+# some constants
   FONT_SIZE_TITLE = 40
   FONT_SIZE_CONTENT = 15
   FONT_SIZE_CLAIMER = 15
