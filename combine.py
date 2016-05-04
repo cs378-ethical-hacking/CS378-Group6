@@ -35,7 +35,7 @@ def run_services(network_dict):
         print "host: " + ip
         services = network_dict[ip][1]
 
-        if "router" in network_dict[ip][3]:
+        if "router" in network_dict[ip][6]:
             print "run snmpwalk..."
             run_snmpwalk(ip)
 
