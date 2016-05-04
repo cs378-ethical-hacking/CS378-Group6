@@ -9,8 +9,8 @@ def run_snmpwalk(ip):
 
     if('SNMP' in result_public[1]):
         print "successful--write to file--"
-        write_to_file(ip+"-snmpwalk.txt", snmpwalk_public)
-        write_to_file(ip+"-snmpwalk.txt",result_public[1])
+        write_to_file(ip+"_output.txt", snmpwalk_public)
+        write_to_file(ip+"_output.txt",result_public[1])
     else:
         for word in word_list:
             if "#" not in word:
@@ -20,8 +20,8 @@ def run_snmpwalk(ip):
 
                 if('SNMP' in coutput[1]):
                     print "successful--write to file--"
-                    write_to_file(ip+"-snmpwalk.txt", snmpwalk_john)
-                    write_to_file(ip+"-snmpwalk.txt", coutput[1])
+                    write_to_file(ip+"_output.txt", snmpwalk_john)
+                    write_to_file(ip+"_output.txt", coutput[1])
                     break;
 
 def run_john(john_list):
